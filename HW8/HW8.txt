@@ -1,0 +1,20 @@
+7.1 Breadth first decomposition
+
+a) All edges in BFS connect either nodes on the same layer, or nodes that are 1 level apart. This is because under the definition of BFS, connected edges are either ancestors and descendants, or peers on the same level. It is not possible for a node to connect with another node that is more than 1 layer apart.
+
+b) As the nodes are being traversed under the BFS algorith, for each node it is tested whether it is visited or not. For the ones that are seen (visited before), it will not be printed. Thus, only parent-child edges will be rendered as tree edges. 
+
+
+
+
+
+7.3 Depth first traversal
+
+If the edge e = (a, b), and there is a path from b to c to a, e is a back edge (a is a descendant of b). However, since b is already traversed, the edge e can also be a cross edge.
+
+
+
+
+7.5 DFS and why you mark you territory: to prevent explosions
+
+
