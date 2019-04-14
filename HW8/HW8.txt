@@ -17,4 +17,54 @@ If the edge e = (a, b), and there is a path from b to c to a, e is a back edge (
 
 7.5 DFS and why you mark you territory: to prevent explosions
 
+a) 
+F(k) = {
+    1, k = 1; 
+    1 + F(k-1) + 2 + 2F(k-2) + 4 + 4F(k-3) + ..., otherwise;
+}
+
+b) 
+F(k-1) = {
+    1 + F(k-2) + 2 + 2F(k-3) + 4 + 4F(k-4)+ ...
+} (general case)
+
+F(k) - F(k-1) = 2 + F(k-2) + 2 + 2F(k-3) + 4 + 4F(k-4)... 
+              = 1 + F(k-1)
+
+F(k) = 1 + 2F(k-1)
+
+F(k) = 1 + 2 + 4 + ... + 2^(k-1) = 2^k - 1
+
+c)
+global seen [];
+procedure DFS(k;;);
+    seen.append(k);
+    if k > 0 then
+        for h <- k - 1 downto 0 do
+            if h not in seen then
+                print(k, h);
+                DFS(h);
+            end if;
+        end for;
+    end if;
+end_DFS;
+
+
+d) 
+Exactly once for every edge:
+n - 1 + n - 2 + n - 3 + ... + 1 = n * (n + 1) / 2
+
+e)
+For the WWKWW problem, having a lookup table saves time when the same calculation is required. Instead of repeating the calculation, the algorithm simply looks for the value that is stored from the last calculation. In this case, it is similar that the seen array stores nodes that have been traversed, so the subsequence recursive calls can skip these nodes and avoid extra printing.
+
+
+
+
+
+
+7.7 Topoligical sort
+
+
+
+
 
