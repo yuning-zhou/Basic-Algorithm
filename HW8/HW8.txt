@@ -90,15 +90,14 @@ Since a parent-child relationship is reversed in preorder and postorder, the two
 
 
 7.Xa
-// BFS Topoligical Sort
+// High-level BFS Topoligical Sort
+// prepare every node 
+for every node k, add its number of edges to its k.val;
 
 global G = (V,E);
 global adj[1...n] stores all egdes starting from 1 to n;
 global Ready q;
 procedure BFS(G, k);
-    // prepare every node 
-    for every node k, add its number of edges to its k.val;
-
     // start from the ready q;
     for all nodes k with k.val = 0, push onto q;
     while q is not empty, first node k to start is q.pop;
@@ -111,6 +110,25 @@ end_BFS;
 
 
 7.Xb 
-// Tarjan's Reverse Topoligical Sort
+// High-level Tarjan's Reverse Topoligical Sort
+// prepare all nodes 
+mark all nodes as not done and not started
+
+global G = (V,E);
+procedure TarjanBFS(G;;w);
+    mark w as started;
+    for all neighbors m of w, 
+        if m is unstarted, TarjanBFS(m);
+        else if m is undone, // there is a cycle
+        start cycle processing.
+    end for;
+    print(w);
+    mark w as done.
+end_TarjanBFS;
+
+
+        
+
+7.Y
 
 
