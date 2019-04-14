@@ -64,6 +64,17 @@ For the WWKWW problem, having a lookup table saves time when the same calculatio
 
 7.7 Topoligical sort
 
+When a Tarjan algorithm processes through the first repeated node in a cycle, the node would be marked "started" but not yet "done". This would be a sign of a cycle, so the algorithm can execute its cycle processing subsequence. 
+
+
+
+7.8 Topoligical sort
+
+When a BFS algorithm runs in a graph that has a cycle, the cycle part will not have a "handle" which can allow every node within the cycle to enter the "ready" queue to be sorted. For that reason, the BFS algorithm will fail when there is a cycle in the graph.
+
+
+7.10 Preorder and postorder vertex numberings
+
 
 
 
