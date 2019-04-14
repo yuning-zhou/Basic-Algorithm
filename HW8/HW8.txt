@@ -89,5 +89,28 @@ Since a parent-child relationship is reversed in preorder and postorder, the two
 
 
 
+7.Xa
+// BFS Topoligical Sort
+
+global G = (V,E);
+global adj[1...n] stores all egdes starting from 1 to n;
+global Ready q;
+procedure BFS(G, k);
+    // prepare every node 
+    for every node k, add its number of edges to its k.val;
+
+    // start from the ready q;
+    for all nodes k with k.val = 0, push onto q;
+    while q is not empty, first node k to start is q.pop;
+    for all vertices m connected to k, m.val - 1;
+    recursively call BFS(m);
+    after the while loop, q should be empty. 
+    print(k);
+end_BFS;
+
+
+
+7.Xb 
+// Tarjan's Reverse Topoligical Sort
 
 
