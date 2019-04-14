@@ -99,11 +99,15 @@ global adj[1...n] stores all egdes starting from 1 to n;
 global Ready q;
 procedure BFS(G, k);
     // start from the ready q;
-    for all nodes k with k.val = 0, push onto q;
-    while q is not empty, first node k to start is q.pop;
-    for all vertices m connected to k, m.val - 1;
-    recursively call BFS(m);
-    after the while loop, q should be empty. 
+    for all nodes k with k.val = 0, push onto q; end for;
+    while q is not empty, 
+        k <- q.pop;
+        for all vertices m connected to k, 
+            m.val - 1;
+            recursively call BFS(m);
+        end for;
+    end while;
+    // after the while loop, q should be empty.
     print(k);
 end_BFS;
 
@@ -117,18 +121,60 @@ mark all nodes as not done and not started
 global G = (V,E);
 procedure TarjanBFS(G;;w);
     mark w as started;
-    for all neighbors m of w, 
-        if m is unstarted, TarjanBFS(m);
-        else if m is undone, // there is a cycle
-        start cycle processing.
+    for all neighbors m of w do 
+        if m is unstarted then TarjanBFS(m);
+        else if m is undone then // there is a cycle
+            start cycle processing;
+        end if;
     end for;
     print(w);
-    mark w as done.
+    mark w as done;
 end_TarjanBFS;
 
 
         
 
 7.Y
+// preprocessing
+// assumption: singleton nodes are centers according to the definition.
+global T = (V, E);
+global adj[1...n];
+global leaf [];
+global center [];
+global leftover [];
+procedure preprocess(T);
+    for v in T do 
+        v.val <- adj[v].length;
+        if v.val = 1 then leaf.append(v);
+        else if v.val = 0 then center.append(v);
+        else leftover.append(v);
+        end if;
+    end for;
+end_preprocess;
+
+procedure leafBiting(T);
+    while leftover ≥ 2 do
+        v <- leaf.pop;
+        for k in adj[v] do 
+            leaf.append(k);
+            leftover.remove(k);
+        end for;
+    end while;
+    // at this point, leftover should have 1 or 2 nodes that are the centers
+    for v in leftover do
+        center.append(v);
+    end for;
+
+    for v in center do
+        print(v);
+    end for;
+end_leafBiting;
+
+
+
+
+
+7.Z
+
 
 
