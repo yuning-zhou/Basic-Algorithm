@@ -73,7 +73,19 @@ When a Tarjan algorithm processes through the first repeated node in a cycle, th
 When a BFS algorithm runs in a graph that has a cycle, the cycle part will not have a "handle" which can allow every node within the cycle to enter the "ready" queue to be sorted. For that reason, the BFS algorithm will fail when there is a cycle in the graph.
 
 
+
+
+
 7.10 Preorder and postorder vertex numberings
+
+a) 
+All nodes from the root to u's children. 
+
+b) 
+If u.pre > v.pre and u.post > v.post, u is a descendant of v.
+
+c)
+Since a parent-child relationship is reversed in preorder and postorder, the two nodes will have a reversed positioning in these two orderings.
 
 
 
