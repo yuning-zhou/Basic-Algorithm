@@ -90,20 +90,21 @@ Since a parent-child relationship is reversed in preorder and postorder, the two
 
 
 7.Xa
-// High-level BFS Topoligical Sort
-// prepare every node 
-for every node k, add its number of edges to its k.val;
-
 global G = (V,E);
 global adj[1...n] stores all egdes starting from 1 to n;
 global Ready q;
+
+// prepare every node 
+for every node k, add its number of edges to its k.val;
+push nodes with its val = 0 to q;
+
 procedure BFS(G, k);
     // start from the ready q;
-    for all nodes k with k.val = 0, push onto q; end for;
     while q is not empty, 
         k <- q.pop;
         for all vertices m connected to k, 
             m.val - 1;
+            if m.val = 0 then q.append(m);
             recursively call BFS(m);
         end for;
     end while;
@@ -176,5 +177,65 @@ end_leafBiting;
 
 7.Z
 
+a) 
+// driver and preprocessing
+global G = (V,E);
+global Adj[1...n];
+global root[];
+procedure driver(Adj[1...n]);
+    for k in Adj[1...n] do
+        if k is null then 
+            // k is a leaf
+            k.longestoutof <- 0;
+            mark k as done;
+        else
+            mark k as undone;
+        end if;
+    end for;
+
+    if r in Adj[1...n] is not in other vertices' Adj then
+        // r is a root
+        root.append(r);
+    end if;
+
+    while root is not empty do
+        m <- root.pop();
+        longest(m);
+    end while;
+end_driver;
 
 
+// DFS
+
+procedure longest(vertex m);
+    if m is undone then
+        for k in Adj[m] do
+            m.longestoutof <- max(k.longestoutof) + Ecost(m, k);
+        end for;
+        mark m as done;
+    end if;
+end_longest;
+
+
+
+
+b)
+global G = (V,E);
+global Adj[1...n];
+
+// prepare all nodes 
+mark all nodes as not done and not started;
+mark roots as done;
+for roots x do TarjanBFS(G,x);
+
+procedure TarjanBFS(G;;w);
+    mark w as started;
+    for all neighbors m of w do 
+        if m is unstarted then TarjanBFS(m);
+        else if m is undone then // there is a cycle
+            start cycle processing;
+        end if;
+    end for;
+    print(w);
+    mark w as done;
+end_TarjanBFS;
