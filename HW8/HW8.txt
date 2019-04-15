@@ -120,17 +120,17 @@ end_BFS;
 mark all nodes as not done and not started
 
 global G = (V,E);
-procedure TarjanBFS(G;;w);
+procedure TarjanDFS(G;;w);
     mark w as started;
     for all neighbors m of w do 
-        if m is unstarted then TarjanBFS(m);
+        if m is unstarted then TarjanDFS(m);
         else if m is undone then // there is a cycle
             start cycle processing;
         end if;
     end for;
     print(w);
     mark w as done;
-end_TarjanBFS;
+end_TarjanDFS;
 
 
         
@@ -226,16 +226,30 @@ global Adj[1...n];
 // prepare all nodes 
 mark all nodes as not done and not started;
 mark roots as done;
-for roots x do TarjanBFS(G,x);
+mark all roots' longestinto as 0;
+for roots x do 
+    TarjanDFS(G,x);
+end for;
 
-procedure TarjanBFS(G;;w);
+procedure TarjanDFS(G;;w);
     mark w as started;
     for all neighbors m of w do 
-        if m is unstarted then TarjanBFS(m);
+        if m is unstarted then 
+            m.longestinto <- max(w.longestinto + Ecost(w,m), m.longestinto)
+            TarjanDFS(m);
         else if m is undone then // there is a cycle
             start cycle processing;
         end if;
     end for;
     print(w);
     mark w as done;
-end_TarjanBFS;
+end_TarjanDFS;
+
+
+
+c) 
+Use part b's answer as a's input.
+
+
+d)
+Use part a's answer as b's input.
