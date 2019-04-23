@@ -72,3 +72,27 @@ end_TwoEdges;
 
 8.1 Floyd-Warshall
 
+// the Floyd-Warshall algorithm that stores the first vertex after i
+
+global Ecost(1...n, 1...n) initialized to store the cost of pairs (i, j) and infinity if no edge is present;
+global Pcost(1...n, 1...n) stores the shortest path, initialized to equal Ecost;
+global kIntermediate(1...n, 1...n) initialized to be filled with 0 if there is an edge, and -1 otherwise;
+global G(V, E);
+procedure F-W(n);
+    for k <- 1 to n do
+        for i <- 1 to n do
+            for j <- 1 to n do
+                if Pcost(i,j) < Pcost(i,k) + Pcost(k,j) then
+                    kIntermediate(i,j) <- j;
+                else if kIntermediate(i,j) == 0 or kIntermediate(i,j) == -1 then
+                    kIntermediate(i,j) <- k;
+                end if;
+            end for;
+        end for;
+    end for;
+end_F-W;
+
+
+
+
+
