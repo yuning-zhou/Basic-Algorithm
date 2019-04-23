@@ -292,7 +292,17 @@ end_F-W;
 
 
 
+
 8.3 Floyd-Warshall
 
+The wrong placement of the k-loop would result in the algorithm calculating the edges from i to k, and k to j. It will not calculate the complete paths.
+
+
+
+
+
+8.21
+
+a)
 
 
