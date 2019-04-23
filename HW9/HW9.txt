@@ -447,6 +447,8 @@ procedure F-W(n);
                     Pcost(i,j) <- Pcost(i,k) + Pcost(k,j);
                     kSecond(i,j) <- kIntermediate(i,j);
                     kIntermediate(i,j) <- k; // store the answer
+                else if Pcost(i,j) = Pcost(i,k) + Pcost(k,j) then
+                    kSecond(i,j) <- kIntermediate(i,j);
                 end if;
             end for;
         end for;
@@ -460,3 +462,23 @@ end_F-W;
 
 8.42 Floyd-Warshall
 
+global Ecost(1...n, 1...n) initialized to store the cost of pairs (i, j) and infinity if no edge is present;
+global Pcost(1...n, 1...n) stores the shortest path, initialized to equal Ecost;
+global kIntermediate(1...n, 1...n) initialized to be filled with 0 if there is an edge, and -1 otherwise;
+global shortestCount(1...n, 1...n) initialized to be filled with 1 if there is an edge, and 0 otherwise;
+global G(V, E);
+procedure F-W(n);
+    for k <- 1 to n do
+        for i <- 1 to n do
+            for j <- 1 to n do
+                if Pcost(i,j) > Pcost(i,k) + Pcost(k,j) then 
+                    shortestCount(i,j) <- shortestCount(i,k) + shortestCount(k,j);
+                    Pcost(i,j) <- Pcost(i,k) + Pcost(k,j);
+                    kIntermediate(i,j) <- k; // store the answer
+                else if Pcost(i,j) = Pcost(i,k) + Pcost(k,j) then
+                    shortestCount(i,j) <- shortestCount(i,j) + 1;
+                end if;
+            end for;
+        end for;
+    end for;
+end_F-W;
