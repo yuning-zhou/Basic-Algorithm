@@ -211,7 +211,7 @@ end_PrintPath;
 
 a)
 
-Copie Manhattan, connect the two graphs using VB. All edges that goes to VB in G1 goes to the external VB, and all edges leaving VB in G2 leaves from the external VB to G2. The complete path would start from G1, pass external VB, and end in G2.
+Copy Manhattan, connect the two graphs using VB. All edges that goes to VB in G1 goes to the external VB, and all edges leaving VB in G2 leaves from the external VB to G2. The complete path would start from G1, pass external VB, and end in G2.
 
 
 b)
@@ -389,7 +389,14 @@ end_F-W;
 
 
 
-8.33 shortest path
+8.33 Shortest path
+
+Copy the graph into 2 pieces. G1 has all edges from s to banks, and G2 has all edges from shops to s. Connect G1 and G2 with edges from banks to shops. Perform a FW algorithm on the overall graph, find the shortest path from s1 to s2.
+
+
+
+
+8.39 Floyd-Warshall
 
 
 
