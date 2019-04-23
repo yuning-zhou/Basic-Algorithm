@@ -211,7 +211,7 @@ end_PrintPath;
 
 a)
 
-Copy Manhattan, connect the two graphs using VB. All edges that goes to VB in G1 goes to the external VB, and all edges leaving VB in G2 leaves from the external VB to G2. The complete path would start from G1, pass external VB, and end in G2.
+Copy Manhattan, connect the two VBs in the two graphs. The edge that connects VBs has a 0 cost. The complete path would start from G1, and end in G2.
 
 
 b)
@@ -403,5 +403,34 @@ Copy G into 2 copies. Connect G1 and G2 with all edges. We start at G1 (or G2), 
 
 
 b)
+Copy G into 2 copies. In each subgraph, connect vertices with edges calculated using the 2-step algorithm. Connect G1 and G2 using the original edges. We start at G1, and finish at G2. 
+
+
+c)
+global Ecost(1...n, 1...n) initialized to store the cost of pairs (i, j) and infinity if no edge is present;
+global Pcost(1...n, 1...n) stores the shortest path, initialized to equal Ecost;
+global kIntermediate(1...n, 1...n) initialized to be filled with 0 if there is an edge, and -1 otherwise;
+global Cookie[1..n];
+global G(V, E);
+procedure F-W(n);
+    for k <- 1 to n do
+        for i <- 1 to n do
+            for j <- 1 to n do
+                if Pcost(i,j) > Pcost(i,k) + Pcost(k,j) and (Edges(i,k) + 1) mod 2 == 0 then 
+                    Pcost(i,j) <- Pcost(i,k) + Pcost(k,j);
+                    kIntermediate(i,j).append(k); // store the answer
+                end if;
+            end for;
+        end for;
+    end for;
+end_F-W;
+
+
+
+
+
+
+
+8.41 Floyd-Warshall
 
 
