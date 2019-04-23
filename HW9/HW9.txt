@@ -398,5 +398,10 @@ Copy the graph into 2 pieces. G1 has all edges from s to banks, and G2 has all e
 
 8.39 Floyd-Warshall
 
+a)
+Copy G into 2 copies. Connect G1 and G2 with all edges. We start at G1 (or G2), and finish at G1 (or G2).
+
+
+b)
 
 
