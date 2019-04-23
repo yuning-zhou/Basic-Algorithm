@@ -209,3 +209,17 @@ end_PrintPath;
 
 8.vb
 
+a)
+
+Copie Manhattan, connect the two graphs using VB. All edges that goes to VB in G1 goes to the external VB, and all edges leaving VB in G2 leaves from the external VB to G2. The complete path would start from G1, pass external VB, and end in G2.
+
+
+b)
+
+The constant c should be 8, since the graph is copied into 2, and 2^3 = 8.
+
+
+
+
+8.cookied
+
