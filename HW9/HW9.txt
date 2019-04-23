@@ -61,7 +61,7 @@ procedure TwoEdges(n);
         for j <- 1 to n do
             for k <- 1 to n do
                 if Best(i,j) > Ecost(i,k) + Ecost(k,j) then
-                    Best <- Ecost(i,k) + Ecost(k,j);
+                    Best(i,j) <- Ecost(i,k) + Ecost(k,j);
                 end if;
             end for;
         end for;
@@ -222,4 +222,51 @@ The constant c should be 8, since the graph is copied into 2, and 2^3 = 8.
 
 
 8.cookied
+
+a)
+global Ecost(1...n, 1...n) initialized to store the cost of pairs (i, j) and infinity if no edge is present;
+global Pcost(1...n, 1...n) stores the shortest path, initialized to equal Ecost;
+global kIntermediate(1...n, 1...n) initialized to be filled with 0 if there is an edge, and -1 otherwise;
+global Cookie[1..n];
+global G(V, E);
+procedure F-W(n);
+    for k <- 1 to n do
+        for i <- 1 to n do
+            for j <- 1 to n do
+                if Pcost(i,j) > Pcost(i,k) + Pcost(k,j) then 
+                    if Cookie[k] > 0 then
+                        Pcost(i,j) <- Pcost(i,k) + Pcost(k,j);
+                        kIntermediate(i,j).append(k); // store the answer
+                    end if;
+                end if;
+            end for;
+        end for;
+    end for;
+end_F-W;
+
+
+b)
+global Cookie[1..n];
+global Best(1...n, 1...n) stores the best path, initialized to be filled with infinity;
+global Ecost(1...n, 1...n) initialized to store the edge costs. For pairs with no edges or edges from and to the same vertex, the cost is infinity;
+procedure TwoEdges(n);
+    for i <- 1 to n do
+        for j <- 1 to n do
+            for k <- 1 to n do
+                if Best(i,j) > Ecost(i,k) + Ecost(k,j) then
+                    if Cookie[k] + Cookie[j] > 0 then 
+                        Best(i,j) <- Ecost(i,k) + Ecost(k,j);
+                    end if;
+                end if;
+            end for;
+        end for;
+    end for;
+end_TwoEdges;
+
+
+
+
+
+
+8.2718
 
