@@ -1,0 +1,50 @@
+
+8.0 a) 
+// the Floyd-Warshall algorithm that stores the answer
+
+global Ecost(1...n, 1...n) initialized to store the cost of pairs (i, j);
+global Pcost(1...n, 1...n) stores the shortest path, initialized to equal Ecost;
+global kIntermediate(1...n, 1...n) initialized to be filled with 0 if there is an edge, and -1 otherwise;
+global G(V, E);
+procedure F-W(n);
+    for k <- 1 to n do:
+        for i <- 1 to n do:
+            for j <- 1 to n do:
+                Pcost(i,j) <- min{Pcost(i,j), Pcost(i,k) + Pcost(k,j)};
+                kIntermediate(i,j) <- k; // store the answer
+            end for;
+        end for;
+    end for;
+end_F-W;
+
+
+
+b)
+// path recovery algorithm
+// drive
+procedure PathDrive(i,j);
+    if kIntermediate(i,j) == -1 then
+        // i and j are not connected
+        print('No path');
+    else 
+        PrintPath(i,j);
+        print(j);
+    end if;
+end_PathDrive;
+
+// actual algorithm
+procedure PrintPath(i,j);
+    k <- kIntermediate(i,j);
+    if k == 0 then
+        // shortest path is the edge between i and j
+        print(i);
+    else
+        PrintPath(i,k);
+        PrintPath(k,j); // does not print j
+    end if;
+end_PrintPath;
+
+
+
+
+
