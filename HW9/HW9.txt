@@ -96,3 +96,12 @@ end_F-W;
 
 
 
+8.rwb
+
+Copy G three times, and connect G1 to G2 with only redges; G2 to G3 with only wedges, and G3 to G1 with only bledges. We can then apply the FW algorithm on this super graph to find all pairs that start and end at G1.
+
+
+
+
+8.cookie
+
