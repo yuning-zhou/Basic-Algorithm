@@ -304,5 +304,67 @@ The wrong placement of the k-loop would result in the algorithm calculating the 
 8.21
 
 a)
+global Ecost(1...n, 1...n) initialized to store the cost of pairs (i, j) and infinity if no edge is present;
+global Pcost(1...n, 1...n) stores the shortest path, initialized to equal Ecost;
+global kIntermediate(1...n, 1...n) initialized to be filled with 0 if there is an edge, and -1 otherwise;
+global G(V, E);
+procedure F-W(n);
+    for k <- 1 to n do
+        for i <- 1 to n do
+            for j <- 1 to n do
+                if Pcost(i,j) > max{longest(i,k), longest(k,j)} then 
+                    Pcost(i,j) <- max{longest(i,k), longest(k,j)};
+                    kIntermediate(i,j) <- k; // store the answer
+                end if;
+            end for;
+        end for;
+    end for;
+end_F-W;
+
+// algorithm to determine the lonest edge in a path
+function longest(i,j);
+    for all edges x on path (i,j) return max{x};
+end_longest;
+
+
+b)
+global Ecost(1...n, 1...n) initialized to store the cost of pairs (i, j) and infinity if no edge is present;
+global Pcost(1...n, 1...n) stores the shortest path, initialized to equal Ecost;
+global kIntermediate(1...n, 1...n) initialized to be filled with 0 if there is an edge, and -1 otherwise;
+global G(V, E);
+procedure F-W(n);
+    for k <- 1 to n do
+        for i <- 1 to n do
+            for j <- 1 to n do
+                if Pcost(i,j) > product(i,k) * product(k,j) then 
+                    Pcost(i,j) <- product(i,k) * product(k,j);
+                    kIntermediate(i,j) <- k; // store the answer
+                end if;
+            end for;
+        end for;
+    end for;
+end_F-W;
+
+
+// algorithm to determine the product of all edges in a path
+function longest(i,j);
+    product <- 1;
+    for all edges x on path (i,j) do
+        product <- product * x;
+    end for;
+    return product;
+end_longest;
+
+
+
+c)
+That cycles should only be travelled once; If there is an edge with cost between 0 and 1, cycling more times will give smaller paths.
+
+
+
+
+
+
+8.2
 
 
