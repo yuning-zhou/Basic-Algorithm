@@ -2,14 +2,14 @@
 8.0 a) 
 // the Floyd-Warshall algorithm that stores the answer
 
-global Ecost(1...n, 1...n) initialized to store the cost of pairs (i, j);
+global Ecost(1...n, 1...n) initialized to store the cost of pairs (i, j) and infinity if no edge is present;
 global Pcost(1...n, 1...n) stores the shortest path, initialized to equal Ecost;
 global kIntermediate(1...n, 1...n) initialized to be filled with 0 if there is an edge, and -1 otherwise;
 global G(V, E);
 procedure F-W(n);
-    for k <- 1 to n do:
-        for i <- 1 to n do:
-            for j <- 1 to n do:
+    for k <- 1 to n do
+        for i <- 1 to n do
+            for j <- 1 to n do
                 Pcost(i,j) <- min{Pcost(i,j), Pcost(i,k) + Pcost(k,j)};
                 kIntermediate(i,j) <- k; // store the answer
             end for;
@@ -47,4 +47,28 @@ end_PrintPath;
 
 
 
+
+8.05 
+
+This question requires a slight change to the standard F-W algorithm to calculate 2 edges (i,k) and (k,j). As such, we can put the k-loop inside the i-j-loops and initialize a Best(i,j) as infinity to be updated and store the best k.
+
+global Best(1...n, 1...n) stores the best path, initialized to be filled with infinity;
+global Ecost(1...n, 1...n) initialized to store the edge costs. For pairs with no edges or edges from and to the same vertex, the cost is infinity;
+procedure TwoEdges(n);
+    for i <- 1 to n do
+        for j <- 1 to n do
+            for k <- 1 to n do
+                if Best(i,j) > Ecost(i,k) + Ecost(k,j) then
+                    Best <- Ecost(i,k) + Ecost(k,j);
+                end if;
+            end for;
+        end for;
+    end for;
+end_TwoEdges;
+
+
+
+
+
+8.1 Floyd-Warshall
 
