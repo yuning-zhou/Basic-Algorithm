@@ -10,8 +10,10 @@ procedure F-W(n);
     for k <- 1 to n do
         for i <- 1 to n do
             for j <- 1 to n do
-                Pcost(i,j) <- min{Pcost(i,j), Pcost(i,k) + Pcost(k,j)};
-                kIntermediate(i,j) <- k; // store the answer
+                if Pcost(i,j) > Pcost(i,k) + Pcost(k,j) then 
+                    Pcost(i,j) <- Pcost(i,k) + Pcost(k,j);
+                    kIntermediate(i,j) <- k; // store the answer
+                end if;
             end for;
         end for;
     end for;
@@ -104,4 +106,106 @@ Copy G three times, and connect G1 to G2 with only redges; G2 to G3 with only we
 
 
 8.cookie
+
+a)
+
+global Ecost(1...n, 1...n) initialized to store the cost of pairs (i, j) and infinity if no edge is present;
+global Pcost(1...n, 1...n) stores the shortest path, initialized to equal Ecost;
+global kIntermediate(1...n, 1...n) initialized to be filled with 0 if there is an edge, and -1 otherwise;
+global Cookie[1..n];
+global G(V, E);
+procedure F-W(n);
+    for k <- 1 to n do
+        for i <- 1 to n do
+            for j <- 1 to n do
+                if Pcost(i,j) > Pcost(i,k) + Pcost(k,j) then 
+                    Pcost(i,j) <- Pcost(i,k) + Pcost(k,j);
+                    kIntermediate(i,j) <- k; // store the answer
+                end if;
+            end for;
+        end for;
+    end for;
+end_F-W;
+
+// path recovery algorithm
+// drive
+global cookies initialized at 0;
+procedure PathDrive(i,j);
+    if kIntermediate(i,j) ≠ -1 then
+        PrintPath(i,j);
+        cookies <- cookies + Cookie[j];
+    end if;
+end_PathDrive;
+
+// actual algorithm
+procedure PrintPath(i,j);
+    k <- kIntermediate(i,j);
+    if k == 0 then
+        // shortest path is the edge between i and j
+        cookies <- cookies + Cookie[i];
+    else
+        PrintPath(i,k);
+        PrintPath(k,j); // does not print j
+    end if;
+end_PrintPath;
+
+
+
+
+b)
+
+To store equal paths, we change kIntermediate(i,j) to store an array of k which offers the shortest path from i to j.
+
+global Ecost(1...n, 1...n) initialized to store the cost of pairs (i, j) and infinity if no edge is present;
+global Pcost(1...n, 1...n) stores the shortest path, initialized to equal Ecost;
+global kIntermediate(1...n, 1...n) initialized to be filled with 0 if there is an edge, and -1 otherwise;
+global Cookie[1..n];
+global G(V, E);
+procedure F-W(n);
+    for k <- 1 to n do
+        for i <- 1 to n do
+            for j <- 1 to n do
+                if Pcost(i,j) > Pcost(i,k) + Pcost(k,j) then 
+                    Pcost(i,j) <- Pcost(i,k) + Pcost(k,j);
+                    kIntermediate(i,j).append(k); // store the answer
+                end if;
+            end for;
+        end for;
+    end for;
+end_F-W;
+
+// path recovery algorithm
+// drive
+global cookies initialized at 0;
+procedure PathDrive(i,j);
+    if kIntermediate(i,j) ≠ -1 then
+        cookies <- PrintPath(i,j) + Cookie[j];
+    end if;
+end_PathDrive;
+
+// actual algorithm
+global max initialized to be -infinity;
+function PrintPath(i,j);
+    for x <- 0 to kIntermediate(i,j).size() do
+        cookies <- 0;
+        k <- kIntermediate(i,j)[x];
+        if k == 0 then
+            // shortest path is the edge between i and j
+            cookies <- cookies + Cookie[i];
+        else
+            PrintPath(i,k);
+            PrintPath(k,j); // does not print j
+        end if;
+        if cookies > max then 
+            max <- cookies;
+            return max;
+        end if;
+    end for;
+end_PrintPath;
+
+
+
+
+
+8.vb
 
