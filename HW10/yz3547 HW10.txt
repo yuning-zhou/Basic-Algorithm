@@ -1,0 +1,10 @@
+
+11.anotherDP
+
+Base case 1: Smallest(l) = 0, if l == 0;
+Base case 2: Smallest(l) = (A[1])^2, if l == 1;
+General case: Smallest(l) = min(0≤k<l){Smallest(k) + (A[k+1] + ... + A[l])^2}, otherwise;
+
+
+
+
