@@ -124,4 +124,13 @@ insert picture
 
 6insertdelete.a
 
+insert picture
+
+
+
+6insertdelete.b
+
+insert picture
+
+6insertdelete.c
 
