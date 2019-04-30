@@ -96,3 +96,17 @@ end_Gbest;
 
 5.Graph
 
+We can use a simplified version of bucket sort and the Paige-Tarjan lexicographical sort algorithm to sort edges in the Adj[n] array.
+
+First, use the PT algorithm to store all parent-child pairs in the parents Adjacency array. 
+
+The second pass uses bucket sort, and places (parent, child) pairs into the child bucket.
+
+Lastly, put each pair back to the parents' Adjacency array in order of the buckets. Since the buckets are sorted, the pairs will be sorted.
+
+
+
+
+
+5.40 a) Analyzing Mergesort
+
