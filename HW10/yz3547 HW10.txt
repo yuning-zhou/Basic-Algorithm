@@ -122,4 +122,6 @@ insert picture
 
 
 
+6insertdelete.a
+
 
