@@ -139,6 +139,16 @@ insert picture
 
 
 
-6.10a
+6.10 2-3trees
+
+a)
+On the path from the root of the 2-3 tree down to the vertex that would become the parent of the leaf-records x (if no splitting were to occur), each vertex would have exactly 3 child vertices. In this way, when the leaf is added, it would push out its siblings and force each parent level to split up, causing the root to be divided into two, and creating a new root.
+
+
+
+
+6.range
+
+
 
 
