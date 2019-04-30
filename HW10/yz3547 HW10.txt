@@ -8,3 +8,91 @@ General case: Smallest(l) = min(0≤k<l){Smallest(k) + (A[k+1] + ... + A[l])^2},
 
 
 
+
+
+
+11.50 Dynamic Programming, lifting
+
+a) 
+We need two specifications. One for when the root is blue, and one for green. Each has different base cases too.
+
+// case blue
+Base: Bbest(T) = T.dat if T is a leaf;
+General: Bbest(T) = Sum(v in Child[T])[Gbest(v)], otherwise;
+
+// case green
+Base: Gbest(T) = 0 if T is a leaf;
+General: Gbest(T) = Sum(v in Child[T])[max{Bbest(v), Gbest(v)}], otherwise;
+
+// main drive
+MaxV(T) = max{Bbest(T), Gbest(T)};
+
+
+
+
+b)
+After we compute the Bbest and Gbest value of each vertex for the first time, we store it in the Data[1...n]array so that our next reference could just use that corresponding value and just do the comparison.
+
+
+
+
+c)
+Read(n);
+Create the empty array of child lists children[1...n];
+Let 1 be the root of the tree;
+Creat the global array Data[1...n] where each Data[i] has the three fields .dat, .Bbest, and .Gbest;
+for i <- 1 to n do Read Data[i].dat endfor;
+for i <- 1 to n do Data[i].Bbest <- Nil endfor;
+for i <- 1 to n do Data[i].Gbest <- Nil endfor;
+print(max{Bbest(1), Gbest(1)});
+
+function Bbest(T);
+    if T is a leaf then return T.dat;
+    else
+        if Data[T].Bbest == Nil then
+            sum <- 0;
+            for v in Child[T] do
+                Gtemp <- Data[v].Gbest;
+                if Gtemp <- Nil then {We have not calculated Gbest(v) yet}
+                    Gtemp <- Gbest(v);
+                    sum <- sum + Gtemp;
+                    Data[v].Gbest <- Gtemp; {store the answer}
+                endif;
+            endfor;
+        endif;
+        Data[T].Bbest <- sum;
+        return sum;
+    endif;
+end_Bbest;
+
+function Gbest(T);
+    if T is a leaf then return 0;
+    else
+        if Data[T].Gbest == Nil then
+            sum <- 0;
+            for v in Child[T] do
+                Gtemp <- Data[v].Gbest;
+                Btemp <- Data[v].Bbest;
+                if Gtemp <- Nil then {We have not calculated Gbest(v) yet}
+                    Gtemp <- Gbest(v);
+                    Data[v].Gbest <- Gtemp; {store the answer}
+                endif;
+                if Btemp <- Nil then {We have not calculated Bbest(v) yet}
+                    Btemp <- Bbest(v);
+                    Data[v].Bbest <- Btemp; {store the answer}
+                endif;
+                if Gtemp ≥ Btemp then sum <- sum + Gtemp;
+                else sum <- sum + Btemp endif;
+            endfor;
+        endif;
+        Data[T].Gbest <- sum;
+        return sum;
+     endif;
+end_Gbest;
+
+
+
+
+
+5.Graph
+
