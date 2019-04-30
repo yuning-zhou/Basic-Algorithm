@@ -134,3 +134,11 @@ insert picture
 
 6insertdelete.c
 
+insert picture
+
+
+
+
+6.10a
+
+
