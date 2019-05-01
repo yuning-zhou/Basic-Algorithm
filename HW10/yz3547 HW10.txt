@@ -184,3 +184,37 @@ As such, the precise number is the number of intervals born before or at x, minu
 
 8.qqq
 
+a)
+insert picture here
+
+We apply the FW algorithm to the supergraph and focus on the upper right quadrant. This entails that all paths have to start from G1, undergo some number of redges, go into G2 from one of the redges (fulfills the R+ requirement), undergo some number of wedges, go into G3 using one of the wedges (W+), undergo some bedges, go into G4 using one bedge (B+), and finally end at G4.
+
+
+
+
+
+b)
+(4n)^3 + O(4n)^2
+
+
+
+c)
+Solve the subproblems of R+W+ first using the 2-step algorithm, and then apply that again to solve the (R+W+)B+ problem.
+
+
+
+
+
+d)
+2n^3 + O(n^2)
+
+
+
+
+
+
+
+
+11.14 Divide and conquer
+
+
