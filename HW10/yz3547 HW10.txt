@@ -217,4 +217,28 @@ d)
 
 11.14 Divide and conquer
 
+a) 
+The "elegant" solution looks at the L-shaped pieces as solutions. At each intersection between 4 pieces, each of the three squares in an L-shaped piece falls into a different quadrant. As such, this piece can be seen as the "missing" piece, which results in three 2*2 mini boards with a missing squre:
+
+insert picture
+
+
+
+b)
+Since the existing piece in a 2*2 board is also L-shaped, we can break larger boards down to this basic unit, and apply recursion:
+
+insert picture
+
+
+c)
+For the elegant solution, we have seen that where the square is missing does not matter, since a 2*2 basic board can rotate, and the L piece can always fit the other 3 2*2 mini boards as there own "missing" squares.
+
+For the clunky solution, the basic unit has the only missing piece, and we can put that basic unit where ever we want in the general board.
+
+
+
+
+
+8.onemore
+
 
