@@ -241,4 +241,17 @@ For the clunky solution, the basic unit has the only missing piece, and we can p
 
 8.onemore
 
+a)
+(r)(w)b
+
+b)
+(r)(w)(b)
+
+c)
+(r)w(b)
+
+
+
+
+8.last
 
