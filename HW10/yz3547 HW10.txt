@@ -172,3 +172,15 @@ This covers the locate function. As for add and delete, it is similar to the reg
 6.intervalstabs
 
 
+To calculate stab(x), we need to consider two factors. As the hint suggests, the number of intervals that are "alive" are:
+
+1. born before or at x (a ≤ x)
+2. did not die before x (b > x)
+
+As such, the precise number is the number of intervals born before or at x, minus those that died before x. Therefore, it is the vertices in the interval 2-3 tree that are to the left of the would-be (a, x) vertex.
+
+
+
+
+8.qqq
+
