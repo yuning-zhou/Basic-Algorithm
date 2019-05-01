@@ -149,6 +149,26 @@ On the path from the root of the 2-3 tree down to the vertex that would become t
 
 6.range
 
+a. Insert(x): insert the key x and increment the count value stored in all vertices on the path from the root to this new vertex by 1.
 
+b. Locate(x): will just compare the value x with the left and right guilds at each vertex along the way. Since the left guide stores the smallest node in the center partition for 3-child structures and in the right partition for 2-child structures, Locate(x) will easily find which partition it should enter, and save time from testing in other partitions.
+
+c. Delete(x): as Delete(x) traverses from root to the vertex, decrement the count value by 1 from all vertices along the way.
+
+d. CountLessThan(x): would simply add the count values in the path, subtracting its right sibling counts at the leaf level.
+
+
+
+
+
+6.intervals
+
+Under an interval 2-3 tree structure, each interval (a,b) will be stored as pairs. A differentpair (r,s) will be considered smaller than (a,b) if either r < a or r = a and s < b.
+
+This covers the locate function. As for add and delete, it is similar to the regular 2-3 tree, where each pair is treated as a vertex.
+
+
+
+6.intervalstabs
 
 
